@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">iMarket</string>
+    <string name="banner">Banner</string>
+    <string name="title">Fazer compras com poucos cliques é só com o iMarket!</string>
+    <string name="description">E para achar as melhores ofertas, queremos saber onde você está</string>
+    <string name="activate_location">Ativar localização</string>
+    <string name="later">mais tarde</string>
+    <string name="shelf">prateleira</string>
+    <string name="logo">logo</string>
+    <string name="layout_top" />
+</resources>
