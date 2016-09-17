@@ -35,7 +35,7 @@ public class SplashActivity extends AwesomeSplash {
 
     private void setupSplash(ConfigSplash configSplash) {
         configSplash.setBackgroundColor(R.color.colorPrimaryDark);
-        configSplash.setAnimCircularRevealDuration(1500);
+        configSplash.setAnimCircularRevealDuration(1000);
         configSplash.setRevealFlagX(Flags.REVEAL_RIGHT);
         configSplash.setRevealFlagY(Flags.REVEAL_BOTTOM);
 
@@ -46,8 +46,8 @@ public class SplashActivity extends AwesomeSplash {
         configSplash.setPathSplashFillColor(R.color.fillwhite);
         configSplash.setOriginalHeight(600);
         configSplash.setOriginalWidth(600);
-        configSplash.setAnimPathStrokeDrawingDuration(1000);
-        configSplash.setAnimPathFillingDuration(1000);
+        configSplash.setAnimPathStrokeDrawingDuration(500);
+        configSplash.setAnimPathFillingDuration(500);
 
 
         //Customize Title

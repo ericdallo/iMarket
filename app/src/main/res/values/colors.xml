@@ -7,4 +7,5 @@
     <color name="fillwhite">#FFFFFE</color>
     <color name="light_gray">#ffe6e6</color>
     <color name="gray">#AAA</color>
+    <color name="transparent_red">#A10A22</color>
 </resources>

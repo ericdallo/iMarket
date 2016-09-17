@@ -6,9 +6,14 @@ import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.TranslateAnimation;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import br.com.imarket.imarket.font.Font;
+import br.com.imarket.imarket.util.IMarketUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -25,8 +30,20 @@ public class LocationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.location);
         ButterKnife.bind(this);
+        IMarketUtils.animateHeader(this);
 
         tvImarket.setTypeface(Font.amatic(this));
+    }
+
+    @OnClick(R.id.bt_activate_location)
+    public void activateLocation() {
+        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+    }
+
+    @OnClick(R.id.bt_later)
+    public void later(View view) {
+        startActivity(new Intent(view.getContext(), SearchActivity.class));
+        finish();
     }
 
     @Override
@@ -39,14 +56,8 @@ public class LocationActivity extends AppCompatActivity {
         }
     }
 
-    @OnClick(R.id.bt_activate_location)
-    public void activateLocation() {
-        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-    }
-
-    @OnClick(R.id.bt_later)
-    public void later(View view) {
-        startActivity(new Intent(view.getContext(), SearchActivity.class));
-        finish();
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 }

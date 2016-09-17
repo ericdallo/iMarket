@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:id="@+id/lt_banner"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lt_banner"
+    android:layout_marginLeft="-40dp"
+    android:layout_marginStart="-40dp"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:contentDescription="@string/banner"
-        android:scaleType="fitXY"
-        android:src="@drawable/banner" />
-</LinearLayout>
+    android:background="@drawable/banner"
+    android:contentDescription="@string/banner"
+    android:orientation="vertical" />
