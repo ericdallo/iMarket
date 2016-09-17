@@ -1,9 +1,6 @@
 package br.com.imarket.imarket;
 
-import android.content.Context;
 import android.content.Intent;
-import android.location.LocationManager;
-import android.util.Log;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.viksaa.sssplash.lib.activity.AwesomeSplash;
@@ -11,6 +8,8 @@ import com.viksaa.sssplash.lib.cnst.Flags;
 import com.viksaa.sssplash.lib.model.ConfigSplash;
 
 import br.com.imarket.imarket.images.Images;
+
+import static br.com.imarket.imarket.util.LocationUtil.isGPSEnabled;
 
 public class SplashActivity extends AwesomeSplash {
 
@@ -21,19 +20,10 @@ public class SplashActivity extends AwesomeSplash {
     public void initSplash(ConfigSplash configSplash) {
         setupSplash(configSplash);
 
-        LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        boolean isGpsDisabled = true;
-
-        try {
-            isGpsDisabled = !manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        } catch (Exception e) {
-            Log.e("SystemError", "Cannot retrieve gps information");
-        }
-
-        if (isGpsDisabled) {
-            nextActivity = new Intent(this, WelcomeActivity.class);
-        } else {
+        if (isGPSEnabled(this)) {
             nextActivity = new Intent(this, SearchActivity.class);
+        } else {
+            nextActivity = new Intent(this, WelcomeActivity.class);
         }
     }
 
