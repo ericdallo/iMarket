@@ -8,4 +8,6 @@
     <string name="shelf">prateleira</string>
     <string name="logo">logo</string>
     <string name="layout_top" />
+    <string name="welcome">Bem-vindo</string>
+    <string name="searching_shops">Procurando mercados perto de você</string>
 </resources>

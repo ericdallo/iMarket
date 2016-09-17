@@ -5,31 +5,19 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
     android:fitsSystemWindows="true"
-    tools:context=".WelcomeActivity">
+    tools:context=".LocationActivity">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/lt_banner"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/banner"
-                android:scaleType="fitXY"
-                android:src="@drawable/banner" />
-        </LinearLayout>
+        <include layout="@layout/header_banner"/>
 
         <RelativeLayout
             android:id="@+id/lt_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/lt_banner"
             android:orientation="vertical"
             android:paddingTop="20dp">
 
@@ -125,5 +113,5 @@
             </LinearLayout>
         </RelativeLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

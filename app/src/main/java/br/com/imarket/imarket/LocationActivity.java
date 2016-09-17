@@ -1,33 +1,29 @@
 package br.com.imarket.imarket;
 
-import android.content.Context;
 import android.content.Intent;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import br.com.imarket.imarket.font.Font;
-import br.com.imarket.imarket.util.LocationUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static br.com.imarket.imarket.util.LocationUtil.isGPSEnabled;
 
-public class WelcomeActivity extends AppCompatActivity {
+public class LocationActivity extends AppCompatActivity {
 
     @BindView(R.id.tv_imarket)
-    private TextView tvImarket;
+    TextView tvImarket;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.configure_location);
+        setContentView(R.layout.location);
         ButterKnife.bind(this);
 
         tvImarket.setTypeface(Font.amatic(this));
@@ -38,9 +34,8 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onResume();
 
         if (isGPSEnabled(this)) {
-
-        } else {
-
+            startActivity(new Intent(this, SearchActivity.class));
+            finish();
         }
     }
 
