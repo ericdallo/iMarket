@@ -13,7 +13,6 @@ import static br.com.imarket.imarket.util.LocationUtil.isGPSEnabled;
 
 public class SplashActivity extends AwesomeSplash {
 
-
     private Intent nextActivity;
 
     @Override
@@ -21,7 +20,7 @@ public class SplashActivity extends AwesomeSplash {
         setupSplash(configSplash);
 
         if (isGPSEnabled(this)) {
-            nextActivity = new Intent(this, SearchActivity.class);
+            nextActivity = new Intent(this, HomeActivity.class);
         } else {
             nextActivity = new Intent(this, LocationActivity.class);
         }

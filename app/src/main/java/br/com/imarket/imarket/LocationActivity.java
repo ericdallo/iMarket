@@ -6,11 +6,9 @@ import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.TranslateAnimation;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.stephentuso.welcome.WelcomeScreenHelper;
 
 import br.com.imarket.imarket.font.Font;
 import br.com.imarket.imarket.util.IMarketUtils;
@@ -22,17 +20,30 @@ import static br.com.imarket.imarket.util.LocationUtil.isGPSEnabled;
 
 public class LocationActivity extends AppCompatActivity {
 
+    WelcomeScreenHelper welcomeScreen;
+
     @BindView(R.id.tv_imarket)
     TextView tvImarket;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.location);
+
+        welcomeScreen = new WelcomeScreenHelper(this, WelcomeScreenActivity.class);
+        welcomeScreen.show(savedInstanceState);
+        welcomeScreen.forceShow();
+
         ButterKnife.bind(this);
         IMarketUtils.animateHeader(this);
 
         tvImarket.setTypeface(Font.amatic(this));
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        welcomeScreen.onSaveInstanceState(outState);
     }
 
     @OnClick(R.id.bt_activate_location)
@@ -42,7 +53,7 @@ public class LocationActivity extends AppCompatActivity {
 
     @OnClick(R.id.bt_later)
     public void later(View view) {
-        startActivity(new Intent(view.getContext(), SearchActivity.class));
+        startActivity(new Intent(view.getContext(), HomeActivity.class));
         finish();
     }
 
@@ -51,7 +62,7 @@ public class LocationActivity extends AppCompatActivity {
         super.onResume();
 
         if (isGPSEnabled(this)) {
-            startActivity(new Intent(this, SearchActivity.class));
+            startActivity(new Intent(this, HomeActivity.class));
             finish();
         }
     }

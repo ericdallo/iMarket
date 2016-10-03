@@ -51,7 +51,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopHolder> {
         @BindView(R.id.tv_shop_address)TextView tvAddress;
         @BindView(R.id.iv_shop) ImageView ivShop;
 
-        public ShopHolder(View view) {
+        ShopHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }

@@ -12,4 +12,8 @@
     <string name="searching_shops">Procurando mercados perto de você</string>
     <string name="shop_picture">shopPicture</string>
     <string name="available_shops">Estes são os mercados perto de você</string>
+    <string name="imarket">iMarket</string>
+    <string name="open">Abriu</string>
+    <string name="close">fechou</string>
+    <string name="search">Pesquisa</string>
 </resources>

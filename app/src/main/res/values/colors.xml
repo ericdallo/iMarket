@@ -8,4 +8,8 @@
     <color name="light_gray">#ffe6e6</color>
     <color name="gray">#AAA</color>
     <color name="transparent_red">#A10A22</color>
+    <color name="red">#ff0000</color>
+    <color name="purple">#8e44ad</color>
+    <color name="orange">#d35400</color>
+    <color name="yellow">#f39c12</color>
 </resources>
