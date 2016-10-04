@@ -3,30 +3,24 @@ package br.com.imarket.imarket;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
-
-import java.util.Arrays;
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageListener;
 
 import br.com.imarket.imarket.font.Font;
-import br.com.imarket.imarket.shop.ShopAdapter;
+import br.com.imarket.imarket.home.HomeBanner;
 import br.com.imarket.imarket.util.IMarketUtils;
-import butterknife.BindInt;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static java.util.Arrays.asList;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -36,10 +30,10 @@ public class HomeActivity extends AppCompatActivity {
     TextView tvToolbar;
     @BindView(R.id.lt_drawer)
     DrawerLayout ltDrawer;
-    @BindView(R.id.rv_left_drawer)
-    RecyclerView rvLeftDrawer;
     @BindView(R.id.search_view)
     MaterialSearchView searchView;
+    @BindView(R.id.lt_carousel)
+    CarouselView carousel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,17 +65,15 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
+        carousel.setPageCount(HomeBanner.size());
+        ImageListener imageListener = new ImageListener() {
             @Override
-            public void onSearchViewShown() {
-                //Do some magic
+            public void setImageForPosition(int position, ImageView imageView) {
+                imageView.setImageResource(HomeBanner.getImage(position));
             }
+        };
+        carousel.setImageListener(imageListener);
 
-            @Override
-            public void onSearchViewClosed() {
-                //Do some magic
-            }
-        });
     }
 
     @Override

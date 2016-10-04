@@ -15,5 +15,13 @@
     <string name="imarket">iMarket</string>
     <string name="open">Abriu</string>
     <string name="close">fechou</string>
-    <string name="search">Pesquisa</string>
+    <string name="search">Busca por produto ou mercado</string>
+    <string name="of_week">da semana</string>
+    <string name="favorites">Favoritos</string>
+
+    <string-array name="search_query_suggestions">
+        <item>Margarina</item>
+        <item>Mercado 123</item>
+        <item>Arroz</item>
+    </string-array>
 </resources>
