@@ -94,7 +94,7 @@
                     android:scaleType="fitXY"
                     android:src="@drawable/shelf" />
 
-                <TextView
+                <br.com.imarket.imarket.view.AmaticTextView
                     android:id="@+id/tv_imarket"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

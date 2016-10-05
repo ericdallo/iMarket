@@ -20,50 +20,64 @@
         tools:context=".LocationActivity">
 
         <RelativeLayout
-            android:id="@+id/lt_home_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorPrimaryDark"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <com.synnapps.carouselview.CarouselView
-                android:id="@+id/lt_carousel"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_favorite_products"
                 android:layout_width="match_parent"
-                android:layout_height="240dp"
-                app:fillColor="@color/white"
-                app:pageColor="#00000000"
-                app:radius="6dp"
-                app:slideInterval="3000"
-                app:strokeColor="#FF777777"
-                app:strokeWidth="1dp" />
+                android:layout_height="match_parent"
+                android:background="@color/shelf_background" />
 
-            <TextView
-                android:id="@+id/tv_favorite"
-                android:layout_width="wrap_content"
+            <com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader
+                android:id="@+id/rv_header"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/lt_carousel"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:text="@string/favorites"
-                android:textColor="@color/white"
-                android:textSize="10pt"
-                android:textStyle="bold" />
+                android:background="@color/colorPrimaryDark">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/lt_carousel"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="5dp"
-                android:layout_toEndOf="@+id/tv_favorite"
-                android:layout_toRightOf="@+id/tv_favorite"
-                android:text="@string/of_week"
-                android:textColor="@color/white"
-                android:textSize="10pt" />
+                <com.synnapps.carouselview.CarouselView
+                    android:id="@+id/lt_carousel"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    app:disableAutoPlayOnUserInteraction="true"
+                    app:fillColor="@color/colorPrimaryDark"
+                    app:pageColor="@color/white"
+                    app:radius="4dp"
+                    app:slideInterval="4000"
+                    app:strokeColor="@color/white"
+                    app:strokeWidth="1dp" />
+
+                <LinearLayout
+                    android:id="@+id/lt_favorites"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lt_carousel"
+                    android:orientation="horizontal"
+                    android:paddingBottom="6dp"
+                    android:paddingTop="6dp">
+
+                    <br.com.imarket.imarket.view.DefaultTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginStart="20dp"
+                        android:text="@string/favorites"
+                        android:textColor="@color/white"
+                        android:textSize="10pt"
+                        android:textStyle="bold" />
+
+                    <br.com.imarket.imarket.view.DefaultTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/of_week"
+                        android:textColor="@color/white"
+                        android:textSize="10pt" />
+                </LinearLayout>
+
+            </com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader>
+
 
         </RelativeLayout>
 
@@ -79,7 +93,6 @@
             android:fitsSystemWindows="true">
 
         </android.support.v7.widget.RecyclerView>
-
 
     </android.support.v4.widget.DrawerLayout>
 

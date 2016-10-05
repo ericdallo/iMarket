@@ -22,9 +22,6 @@ public class LocationActivity extends AppCompatActivity {
 
     WelcomeScreenHelper welcomeScreen;
 
-    @BindView(R.id.tv_imarket)
-    TextView tvImarket;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +33,6 @@ public class LocationActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
         IMarketUtils.animateHeader(this);
-
-        tvImarket.setTypeface(Font.amatic(this));
     }
 
     @Override
