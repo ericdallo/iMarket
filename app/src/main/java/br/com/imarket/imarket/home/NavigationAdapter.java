@@ -12,11 +12,13 @@ import android.widget.TextView;
 import br.com.imarket.imarket.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.NavigationHolder> {
 
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
+    private static final int HEADER_POSITION = 1;
 
     private NavigationItem[] items = NavigationItem.values();
     private Context context;
@@ -42,17 +44,19 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Na
         if (holder.type == TYPE_HEADER) {
 
         } else {
-            TextView tvNavigationItem = holder.tvNavigationItem;
-            ImageView ivNavigationItem = holder.ivNavigationItem;
+            TextView tvNavigationItem = holder.tvTitleNavigationItem;
+            TextView tvDescriptionNavigationItem = holder.tvDescriptionNavigationItem;
+            ImageView ivNavigationItem = holder.cvNavigationItem;
 
-            tvNavigationItem.setText(items[position - 1].getName());
-            ivNavigationItem.setImageDrawable(context.getResources().getDrawable(items[position - 1].getImagePath()));
+            tvNavigationItem.setText(items[position - HEADER_POSITION].getName());
+            tvDescriptionNavigationItem.setText(items[position - HEADER_POSITION].getDescription());
+            ivNavigationItem.setImageDrawable(context.getResources().getDrawable(items[position - HEADER_POSITION].getImagePath()));
         }
     }
 
     @Override
     public int getItemCount() {
-        return items.length + 1;
+        return items.length + HEADER_POSITION;
     }
 
     @Override
@@ -67,8 +71,9 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Na
 
         private int type;
 
-        @Nullable @BindView(R.id.tv_navigation_item) TextView tvNavigationItem;
-        @Nullable @BindView(R.id.iv_navigation_item) ImageView ivNavigationItem;
+        @Nullable @BindView(R.id.tv_title_navigation_item) TextView tvTitleNavigationItem;
+        @Nullable @BindView(R.id.tv_description_navigation_item) TextView tvDescriptionNavigationItem;
+        @Nullable @BindView(R.id.cv_navigation_item) CircleImageView cvNavigationItem;
 
         NavigationHolder (View view, int viewType) {
             super(view);

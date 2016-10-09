@@ -67,6 +67,7 @@ public class HomeActivity extends AppCompatActivity {
         rvLeftDrawer.setHasFixedSize(true);
         rvLeftDrawer.setLayoutManager(new LinearLayoutManager(this));
         rvLeftDrawer.setAdapter(navigationAdapter);
+        rvLeftDrawer.setBackgroundColor(getResources().getColor(R.color.shelf_background));
 
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
