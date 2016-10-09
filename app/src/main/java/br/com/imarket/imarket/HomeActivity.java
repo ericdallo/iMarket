@@ -6,6 +6,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -18,9 +19,9 @@ import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 
 import br.com.imarket.imarket.home.HomeBanner;
+import br.com.imarket.imarket.home.NavigationAdapter;
 import br.com.imarket.imarket.shop.Product;
 import br.com.imarket.imarket.shop.FavoriteProductAdapter;
 import br.com.imarket.imarket.util.IMarketUtils;
@@ -37,6 +38,8 @@ public class HomeActivity extends AppCompatActivity {
     Toolbar toolbar;
     @BindView(R.id.lt_drawer)
     DrawerLayout ltDrawer;
+    @BindView(R.id.rv_left_drawer)
+    RecyclerView rvLeftDrawer;
     @BindView(R.id.search_view)
     MaterialSearchView searchView;
     @BindView(R.id.lt_carousel)
@@ -59,6 +62,11 @@ public class HomeActivity extends AppCompatActivity {
         ActionBarDrawerToggle actionBarToggle = new ActionBarDrawerToggle(this, ltDrawer, toolbar, R.string.open, R.string.close);
         ltDrawer.addDrawerListener(actionBarToggle);
         actionBarToggle.syncState();
+
+        NavigationAdapter navigationAdapter = new NavigationAdapter(this);
+        rvLeftDrawer.setHasFixedSize(true);
+        rvLeftDrawer.setLayoutManager(new LinearLayoutManager(this));
+        rvLeftDrawer.setAdapter(navigationAdapter);
 
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
