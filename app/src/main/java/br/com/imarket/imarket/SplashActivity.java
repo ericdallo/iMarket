@@ -20,7 +20,7 @@ public class SplashActivity extends AwesomeSplash {
         setupSplash(configSplash);
 
         if (isGPSEnabled(this)) {
-            nextActivity = new Intent(this, HomeActivity.class);
+            nextActivity = new Intent(this, MainActivity.class);
         } else {
             nextActivity = new Intent(this, LocationActivity.class);
         }

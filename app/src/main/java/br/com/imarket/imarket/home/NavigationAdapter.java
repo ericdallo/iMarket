@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import br.com.imarket.imarket.DrawerInteraction;
 import br.com.imarket.imarket.R;
+import br.com.imarket.imarket.login.LoginFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -22,27 +24,36 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Na
 
     private NavigationItem[] items = NavigationItem.values();
     private Context context;
+    private DrawerInteraction drawerInteraction;
 
-    public NavigationAdapter(Context context) {
+    public NavigationAdapter(Context context, DrawerInteraction drawerInteraction) {
         this.context = context;
+        this.drawerInteraction = drawerInteraction;
     }
 
     @Override
     public NavigationHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        int layout = TYPE_ITEM;
-        if (viewType == TYPE_ITEM) {
-            layout = R.layout.navigation_item;
-        } else if (viewType == TYPE_HEADER) {
-            layout = R.layout.navigation_header;
+        View view ;
+        if (viewType == TYPE_HEADER) {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.navigation_header, parent, false);
+        } else {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.navigation_item, parent, false);
         }
-        View view = LayoutInflater.from(parent.getContext()).inflate(layout, parent, false);
         return new NavigationHolder(view, viewType);
     }
 
     @Override
-    public void onBindViewHolder(NavigationHolder holder, int position) {
-        if (holder.type == TYPE_HEADER) {
+    public void onBindViewHolder(NavigationHolder holder, final int position) {
+        View view = holder.viewItem;
+        View.OnClickListener selectItemListener;
 
+        if (holder.type == TYPE_HEADER) {
+            selectItemListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    drawerInteraction.changeFragment(new LoginFragment());
+                }
+            };
         } else {
             TextView tvNavigationItem = holder.tvTitleNavigationItem;
             TextView tvDescriptionNavigationItem = holder.tvDescriptionNavigationItem;
@@ -51,7 +62,15 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Na
             tvNavigationItem.setText(items[position - HEADER_POSITION].getName());
             tvDescriptionNavigationItem.setText(items[position - HEADER_POSITION].getDescription());
             ivNavigationItem.setImageDrawable(context.getResources().getDrawable(items[position - HEADER_POSITION].getImagePath()));
+
+            selectItemListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    drawerInteraction.changeFragment(items[position - HEADER_POSITION].getFragment());
+                }
+            };
         }
+        view.setOnClickListener(selectItemListener);
     }
 
     @Override
@@ -71,15 +90,14 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Na
 
         private int type;
 
+        @Nullable @BindView(R.id.lt_item) View viewItem;
         @Nullable @BindView(R.id.tv_title_navigation_item) TextView tvTitleNavigationItem;
         @Nullable @BindView(R.id.tv_description_navigation_item) TextView tvDescriptionNavigationItem;
         @Nullable @BindView(R.id.cv_navigation_item) CircleImageView cvNavigationItem;
 
         NavigationHolder (View view, int viewType) {
             super(view);
-            if (viewType == TYPE_ITEM) {
-                ButterKnife.bind(this, view);
-            }
+            ButterKnife.bind(this, view);
 
             type = viewType;
         }

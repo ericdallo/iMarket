@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_favorite_products"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/shelf_background" />
+
+    <com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader
+        android:id="@+id/rv_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark">
+
+        <com.synnapps.carouselview.CarouselView
+            android:id="@+id/lt_carousel"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            app:disableAutoPlayOnUserInteraction="true"
+            app:fillColor="@color/colorPrimaryDark"
+            app:pageColor="@color/white"
+            app:radius="4dp"
+            app:slideInterval="4000"
+            app:strokeColor="@color/white"
+            app:strokeWidth="1dp" />
+
+        <LinearLayout
+            android:id="@+id/lt_favorites"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lt_carousel"
+            android:orientation="horizontal"
+            android:paddingBottom="6dp"
+            android:paddingTop="6dp">
+
+            <br.com.imarket.imarket.view.DefaultTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:text="@string/favorites"
+                android:textColor="@color/white"
+                android:textSize="10pt"
+                android:textStyle="bold" />
+
+            <br.com.imarket.imarket.view.DefaultTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@string/of_week"
+                android:textColor="@color/white"
+                android:textSize="10pt" />
+        </LinearLayout>
+
+    </com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader>
+</RelativeLayout>

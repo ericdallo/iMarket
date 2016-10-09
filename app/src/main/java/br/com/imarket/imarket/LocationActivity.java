@@ -6,13 +6,10 @@ import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.TextView;
 
 import com.stephentuso.welcome.WelcomeScreenHelper;
 
-import br.com.imarket.imarket.font.Font;
 import br.com.imarket.imarket.util.IMarketUtils;
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -48,7 +45,7 @@ public class LocationActivity extends AppCompatActivity {
 
     @OnClick(R.id.bt_later)
     public void later(View view) {
-        startActivity(new Intent(view.getContext(), HomeActivity.class));
+        startActivity(new Intent(view.getContext(), MainActivity.class));
         finish();
     }
 
@@ -57,7 +54,7 @@ public class LocationActivity extends AppCompatActivity {
         super.onResume();
 
         if (isGPSEnabled(this)) {
-            startActivity(new Intent(this, HomeActivity.class));
+            startActivity(new Intent(this, MainActivity.class));
             finish();
         }
     }
