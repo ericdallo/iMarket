@@ -51,22 +51,24 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Na
             selectItemListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    drawerInteraction.changeFragment(new LoginFragment());
+                    drawerInteraction.changeFragment(new LoginFragment(), context.getResources().getString(R.string.login));
                 }
             };
         } else {
+            final NavigationItem currentItem = items[position - HEADER_POSITION];
+
             TextView tvNavigationItem = holder.tvTitleNavigationItem;
             TextView tvDescriptionNavigationItem = holder.tvDescriptionNavigationItem;
             ImageView ivNavigationItem = holder.cvNavigationItem;
 
-            tvNavigationItem.setText(items[position - HEADER_POSITION].getName());
-            tvDescriptionNavigationItem.setText(items[position - HEADER_POSITION].getDescription());
-            ivNavigationItem.setImageDrawable(context.getResources().getDrawable(items[position - HEADER_POSITION].getImagePath()));
+            tvNavigationItem.setText(currentItem.getName());
+            tvDescriptionNavigationItem.setText(currentItem.getDescription());
+            ivNavigationItem.setImageDrawable(context.getResources().getDrawable(currentItem.getImagePath()));
 
             selectItemListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    drawerInteraction.changeFragment(items[position - HEADER_POSITION].getFragment());
+                    drawerInteraction.changeFragment(currentItem.getFragment(), currentItem.getName());
                 }
             };
         }

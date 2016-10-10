@@ -36,6 +36,7 @@ enum NavigationItem {
     private final int imagePath;
     private final String name;
     private final String description;
+    private String title;
 
     NavigationItem(int imagePath, String name, String description) {
         this.imagePath = imagePath;
@@ -47,6 +48,10 @@ enum NavigationItem {
         return imagePath;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     public String getName() {
         return name;
     }
@@ -56,5 +61,4 @@ enum NavigationItem {
     }
 
     public abstract Fragment getFragment();
-
 }

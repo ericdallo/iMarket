@@ -17,6 +17,7 @@ import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import br.com.imarket.imarket.home.NavigationAdapter;
 import br.com.imarket.imarket.util.IMarketUtils;
+import br.com.imarket.imarket.view.AmaticTextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements DrawerInteraction
     RecyclerView rvLeftDrawer;
     @BindView(R.id.search_view)
     MaterialSearchView searchView;
+    @BindView(R.id.toolbar_title)
+    AmaticTextView toolbarTitle;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements DrawerInteraction
         });
 
         dtDrawer.closeDrawer(rvLeftDrawer);
-
+        changeFragment(new HomeFragment(), getResources().getString(R.string.imarket));
     }
 
     @Override
@@ -89,10 +92,11 @@ public class MainActivity extends AppCompatActivity implements DrawerInteraction
     }
 
     @Override
-    public void changeFragment(Fragment fragment) {
+    public void changeFragment(Fragment fragment, String title) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.lt_main_content, fragment);
         transaction.commit();
+        toolbarTitle.setText(title);
         dtDrawer.closeDrawer(rvLeftDrawer);
     }
 }

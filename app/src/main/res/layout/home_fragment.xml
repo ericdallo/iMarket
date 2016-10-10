@@ -37,7 +37,7 @@
             android:paddingBottom="6dp"
             android:paddingTop="6dp">
 
-            <br.com.imarket.imarket.view.DefaultTextView
+            <br.com.imarket.imarket.view.IMarketTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -47,7 +47,7 @@
                 android:textSize="10pt"
                 android:textStyle="bold" />
 
-            <br.com.imarket.imarket.view.DefaultTextView
+            <br.com.imarket.imarket.view.IMarketTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"

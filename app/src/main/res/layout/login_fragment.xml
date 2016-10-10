@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/login_background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingEnd="30dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingStart="30dp"
+        android:paddingTop="20dp">
+
+        <br.com.imarket.imarket.view.IMarketTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/input_login"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
+
+        <br.com.imarket.imarket.view.LoginEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/login_fields_big_spacing"
+            android:background="@drawable/gray_roundcorner"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:padding="10dp"
+            android:textColor="@color/gray" />
+
+        <br.com.imarket.imarket.view.LoginEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/login_fields_small_spacing"
+            android:background="@drawable/gray_roundcorner"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:textColor="@color/gray" />
+
+        <br.com.imarket.imarket.view.IMarketButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/login_fields_big_spacing"
+            android:background="@drawable/white_bordered_roundcorner"
+            android:text="@string/confirm"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp" />
+
+        <br.com.imarket.imarket.view.FacebookButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/login_fields_small_spacing"
+            android:text="@string/facebook_login" />
+
+        <br.com.imarket.imarket.view.IMarketTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/login_fields_big_spacing"
+            android:text="@string/new_around_here"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
+
+        <br.com.imarket.imarket.view.IMarketButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/login_fields_big_spacing"
+            android:background="@drawable/red_roundcorner"
+            android:text="@string/register"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

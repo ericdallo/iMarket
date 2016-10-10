@@ -43,6 +43,7 @@ dependencies {
     compile 'com.bartoszlipinski:recyclerviewheader2:2.0.1'
     compile 'de.hdodenhof:circleimageview:2.1.0'
 
+
     compile 'com.jakewharton:butterknife:8.4.0'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
 

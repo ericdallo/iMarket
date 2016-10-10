@@ -18,7 +18,15 @@
     <string name="search">Busca por produto ou mercado</string>
     <string name="of_week">da semana</string>
     <string name="favorites">Favoritos</string>
-    <string name="login">login</string>
+    <string name="login">Login</string>
+    <string name="facebook_login">login com o Facebook</string>
+    <string name="enter">Entrar</string>
+    <string name="email">E-mail</string>
+    <string name="password">Senha</string>
+    <string name="new_around_here">Novo por aqui?</string>
+    <string name="register">Cadastre-se!</string>
+    <string name="confirm">Confirmar</string>
+    <string name="input_login">Informe seu login</string>
 
     <string-array name="search_query_suggestions">
         <item>Margarina</item>

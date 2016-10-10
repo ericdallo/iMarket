@@ -1,26 +1,27 @@
 package br.com.imarket.imarket.view;
 
+
 import android.content.Context;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import br.com.imarket.imarket.font.Font;
 
-public class DefaultTextView extends TextView {
+public class LoginEditText extends EditText {
 
     private static final String ANDROID_SCHEMA = "http://schemas.android.com/apk/res/android";
 
-    public DefaultTextView(Context context) {
+    public LoginEditText(Context context) {
         super(context);
     }
 
-    public DefaultTextView(Context context, AttributeSet attrs) {
+    public LoginEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
         applyCustomFont(context, attrs);
     }
 
-    public DefaultTextView(Context context, AttributeSet attrs, int defStyle) {
+    public LoginEditText(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         applyCustomFont(context, attrs);
     }

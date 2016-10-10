@@ -2,10 +2,15 @@ package br.com.imarket.imarket.font;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.util.AttributeSet;
+import android.view.View;
+import android.widget.TextView;
 
 import static android.graphics.Typeface.BOLD;
 
 public class Font {
+
+    private static final String ANDROID_SCHEMA = "http://schemas.android.com/apk/res/android";
 
     private final static String FONTS_PATH = "fonts/";
 
@@ -31,4 +36,23 @@ public class Font {
         }
         return museoSans;
     }
+
+    public static void applyCustomFont(TextView textView, Context context, AttributeSet attrs) {
+        String style = "0x0";
+        try {
+            style = attrs.getAttributeValue(ANDROID_SCHEMA, "textStyle");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        int textStyle;
+        if (style != null && style.equals("0x1")) {
+            textStyle = Typeface.BOLD;
+        }else{
+            textStyle = Typeface.NORMAL;
+        }
+        textView.setTypeface(Font.museoSans(context, textStyle));
+    }
+
+
 }
