@@ -1,6 +1,7 @@
 package br.com.imarket.imarket;
 
 import android.os.Bundle;
+import android.os.Parcel;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -17,6 +18,7 @@ import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import br.com.imarket.imarket.home.NavigationAdapter;
 import br.com.imarket.imarket.util.IMarketUtils;
+import br.com.imarket.imarket.util.Preferences;
 import br.com.imarket.imarket.view.AmaticTextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,12 +36,15 @@ public class MainActivity extends AppCompatActivity implements DrawerInteraction
     @BindView(R.id.toolbar_title)
     AmaticTextView toolbarTitle;
 
+    private NavigationAdapter navigationAdapter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
         ButterKnife.bind(this);
         IMarketUtils.animateHeader(this);
+        Preferences.setActivity(this);
 
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
@@ -48,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements DrawerInteraction
         dtDrawer.addDrawerListener(actionBarToggle);
         actionBarToggle.syncState();
 
-        NavigationAdapter navigationAdapter = new NavigationAdapter(this, this);
+        navigationAdapter = new NavigationAdapter(this, this);
         rvLeftDrawer.setHasFixedSize(true);
         rvLeftDrawer.setLayoutManager(new LinearLayoutManager(this));
         rvLeftDrawer.setAdapter(navigationAdapter);
@@ -93,10 +98,13 @@ public class MainActivity extends AppCompatActivity implements DrawerInteraction
 
     @Override
     public void changeFragment(Fragment fragment, String title) {
+        navigationAdapter.notifyDataSetChanged(); // TODO nao chamar sempre
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.lt_main_content, fragment);
         transaction.commit();
         toolbarTitle.setText(title);
         dtDrawer.closeDrawer(rvLeftDrawer);
     }
+
 }

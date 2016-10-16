@@ -27,6 +27,22 @@
     <string name="register">Cadastre-se!</string>
     <string name="confirm">Confirmar</string>
     <string name="input_login">Informe seu login</string>
+    <string name="inform_credentials">Informe seu login</string>
+    <string name="loading">Carregando. Por favor aguarde...</string>
+    <string name="login_error">Houve um problema ao se logar. Tente novamente mais tarde</string>
+    <string name="register_error">Houve um problema ao se registrar. Tente novamente mais tarde</string>
+    <string name="login_invalid_credentials">E-mail ou senha inválidos</string>
+    <string name="my_profile">Meu perfil</string>
+    <string name="register_title">Cadastro</string>
+    <string name="name">Nome</string>
+    <string name="confirm_register">Cadastrar!</string>
+    <string name="newsletter">Desejo receber promoções e notícias no meu e-mail</string>
+    <string name="terms_and_conditions">Li e aceito os termos de uso e políticas de privacidade</string>
+    <string name="confirm_password">Confirmar senha</string>
+    <string name="invald_inform_all_fields">Informe todos os campos</string>
+    <string name="invalid_passwords_not_match">As senhas não são iguais, digite novamente</string>
+    <string name="invalid_password_length">A senha deve ter no mínimo 6 caracteres</string>
+    <string name="invalid_email">Informe um e-mail válido</string>
 
     <string-array name="search_query_suggestions">
         <item>Margarina</item>

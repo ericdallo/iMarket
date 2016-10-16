@@ -11,10 +11,15 @@ import android.widget.TextView;
 
 import br.com.imarket.imarket.DrawerInteraction;
 import br.com.imarket.imarket.R;
+import br.com.imarket.imarket.login.BuyerLogin;
+import br.com.imarket.imarket.login.LoggedBuyer;
 import br.com.imarket.imarket.login.LoginFragment;
+import br.com.imarket.imarket.view.IMarketTextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static br.com.imarket.imarket.login.LoggedBuyer.isLogged;
 
 public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.NavigationHolder> {
 
@@ -48,10 +53,15 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Na
         View.OnClickListener selectItemListener;
 
         if (holder.type == TYPE_HEADER) {
+            if(isLogged()) {
+                BuyerLogin buyer = LoggedBuyer.getBuyer();
+                holder.tvHeaderTitle.setText(buyer.getName());
+                holder.tvHeaderDescription.setText(view.getResources().getString(R.string.my_profile));
+            }
             selectItemListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    drawerInteraction.changeFragment(new LoginFragment(), context.getResources().getString(R.string.login));
+                    drawerInteraction.changeFragment(new LoginFragment(drawerInteraction), context.getResources().getString(R.string.login));
                 }
             };
         } else {
@@ -96,6 +106,8 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Na
         @Nullable @BindView(R.id.tv_title_navigation_item) TextView tvTitleNavigationItem;
         @Nullable @BindView(R.id.tv_description_navigation_item) TextView tvDescriptionNavigationItem;
         @Nullable @BindView(R.id.cv_navigation_item) CircleImageView cvNavigationItem;
+        @Nullable @BindView(R.id.tv_header_title) IMarketTextView tvHeaderTitle;
+        @Nullable @BindView(R.id.tv_header_description) IMarketTextView tvHeaderDescription;
 
         NavigationHolder (View view, int viewType) {
             super(view);

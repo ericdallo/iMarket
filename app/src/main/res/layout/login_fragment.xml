@@ -15,25 +15,18 @@
         android:paddingStart="30dp"
         android:paddingTop="20dp">
 
-        <br.com.imarket.imarket.view.IMarketTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/input_login"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="24sp" />
-
         <br.com.imarket.imarket.view.LoginEditText
+            android:id="@+id/et_login_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/login_fields_big_spacing"
             android:background="@drawable/gray_roundcorner"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:padding="10dp"
-            android:textColor="@color/gray" />
+            android:textColor="@color/black" />
 
         <br.com.imarket.imarket.view.LoginEditText
+            android:id="@+id/et_login_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/login_fields_small_spacing"
@@ -41,9 +34,10 @@
             android:hint="@string/password"
             android:inputType="textPassword"
             android:padding="10dp"
-            android:textColor="@color/gray" />
+            android:textColor="@color/black" />
 
         <br.com.imarket.imarket.view.IMarketButton
+            android:id="@+id/bt_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/login_fields_big_spacing"
@@ -67,6 +61,7 @@
             android:textSize="24sp" />
 
         <br.com.imarket.imarket.view.IMarketButton
+            android:id="@+id/bt_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/login_fields_big_spacing"

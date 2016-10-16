@@ -5,8 +5,14 @@ import android.support.v4.app.Fragment;
 import br.com.imarket.imarket.HomeFragment;
 import br.com.imarket.imarket.R;
 
-enum NavigationItem {
+public enum NavigationItem {
 
+    HOME(R.drawable.navigation_login_item, "Home", "Início") {
+        @Override
+        public Fragment getFragment() {
+            return new HomeFragment();
+        }
+    },
     CART(R.drawable.navigation_login_item, "Carrinho", "Gerencie sua compra") {
         @Override
         public Fragment getFragment() {
@@ -30,13 +36,11 @@ enum NavigationItem {
         public Fragment getFragment() {
             return new HomeFragment();
         }
-    },
-    ;
+    };
 
     private final int imagePath;
     private final String name;
     private final String description;
-    private String title;
 
     NavigationItem(int imagePath, String name, String description) {
         this.imagePath = imagePath;
@@ -46,10 +50,6 @@ enum NavigationItem {
 
     public int getImagePath() {
         return imagePath;
-    }
-
-    public String getTitle() {
-        return title;
     }
 
     public String getName() {
