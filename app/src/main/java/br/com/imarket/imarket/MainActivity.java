@@ -1,7 +1,7 @@
 package br.com.imarket.imarket;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.os.Parcel;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -14,9 +14,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.facebook.login.LoginManager;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import br.com.imarket.imarket.home.NavigationAdapter;
+import br.com.imarket.imarket.login.LoginService;
+import br.com.imarket.imarket.login.LogoutCallback;
 import br.com.imarket.imarket.util.IMarketUtils;
 import br.com.imarket.imarket.util.Preferences;
 import br.com.imarket.imarket.view.AmaticTextView;
@@ -37,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements DrawerInteraction
     AmaticTextView toolbarTitle;
 
     private NavigationAdapter navigationAdapter;
+    private LoginService loginService;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements DrawerInteraction
             }
         });
 
-        dtDrawer.closeDrawer(rvLeftDrawer);
         changeFragment(new HomeFragment(), getResources().getString(R.string.imarket));
     }
 
@@ -98,6 +101,32 @@ public class MainActivity extends AppCompatActivity implements DrawerInteraction
 
     @Override
     public void changeFragment(Fragment fragment, String title) {
+        changeMainFragment(fragment, title);
+    }
+
+    @Override
+    public void logout() {
+        final ProgressDialog logoutDialog = ProgressDialog.show(this, "", getString(R.string.logging_out), true);
+
+        if (loginService == null) {
+            loginService = new LoginService();
+        }
+        loginService.logout(new LogoutCallback() {
+            @Override
+            public void success() {
+                logoutDialog.dismiss();
+                changeMainFragment(new HomeFragment(), getString(R.string.imarket));
+                LoginManager.getInstance().logOut();
+            }
+
+            @Override
+            public void error() {
+                logoutDialog.cancel();
+            }
+        });
+    }
+
+    private void changeMainFragment(Fragment fragment, String title) {
         navigationAdapter.notifyDataSetChanged(); // TODO nao chamar sempre
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

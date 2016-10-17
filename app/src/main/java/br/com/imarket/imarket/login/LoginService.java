@@ -78,4 +78,23 @@ public class LoginService {
             }
         });
     }
+
+
+    public void logout(final LogoutCallback callback) {
+        if (LoggedBuyer.isLogged()) {
+            loginClient.logout().enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    LoggedBuyer.logout();
+                    callback.success();
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    callback.error();
+                }
+            });
+
+        }
+    }
 }

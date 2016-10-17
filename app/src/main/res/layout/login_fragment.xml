@@ -23,7 +23,8 @@
             android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:padding="10dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textCursorDrawable="@null" />
 
         <br.com.imarket.imarket.view.LoginEditText
             android:id="@+id/et_login_password"
@@ -34,7 +35,8 @@
             android:hint="@string/password"
             android:inputType="textPassword"
             android:padding="10dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textCursorDrawable="@null" />
 
         <br.com.imarket.imarket.view.IMarketButton
             android:id="@+id/bt_login"
@@ -46,11 +48,21 @@
             android:textColor="@color/colorPrimary"
             android:textSize="20sp" />
 
-        <br.com.imarket.imarket.view.FacebookButton
+        <!--<br.com.imarket.imarket.view.FacebookButton
+            android:id="@+id/bt_facebook_login"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/login_fields_small_spacing"
-            android:text="@string/facebook_login" />
+            android:text="@string/facebook_login" />-->
+        <br.com.imarket.imarket.view.FacebookButton
+            android:id="@+id/bt_facebook_login"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/login_fields_small_spacing"
+            android:backgroundTint="@color/facebook"
+            android:text="@string/facebook_login"
+            android:textSize="20sp" />
 
         <br.com.imarket.imarket.view.IMarketTextView
             android:layout_width="match_parent"

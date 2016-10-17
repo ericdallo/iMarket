@@ -6,9 +6,9 @@ public class HomeBanner {
 
     private static int[] images = {
             R.drawable.banner1,
-            R.drawable.carousel_teste,
+            R.drawable.banner2,
             R.drawable.banner1,
-            R.drawable.carousel_teste
+            R.drawable.banner2
     };
 
     public static int size() {

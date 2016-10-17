@@ -13,10 +13,14 @@ public class BuyerRegisterDTO {
     @SerializedName("password")
     private final String password;
 
-    public BuyerRegisterDTO(String name, String email, String password) {
+    @SerializedName("login_origin")
+    private final LoginOrigin loginOrigin;
+
+    public BuyerRegisterDTO(String name, String email, String password, LoginOrigin loginOrigin) {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.loginOrigin = loginOrigin;
     }
 
     public String getName() {
@@ -29,5 +33,9 @@ public class BuyerRegisterDTO {
 
     public String getPassword() {
         return password;
+    }
+
+    public LoginOrigin getLoginOrigin() {
+        return loginOrigin;
     }
 }

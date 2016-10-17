@@ -11,14 +11,14 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static br.com.imarket.imarket.util.Preferences.PREF_COOKIES;
+import static br.com.imarket.imarket.util.Preferences.COOKIES;
 
 class AddCookiesInterceptor implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request.Builder builder = chain.request().newBuilder();
-        Set<String> preferences = Preferences.getStringSet(PREF_COOKIES, new HashSet<String>());
+        Set<String> preferences = Preferences.getStringSet(COOKIES, new HashSet<String>());
             for (String cookie : preferences) {
             builder.addHeader("Cookie", cookie);
             Log.v("OkHttp", "Adding Header: " + cookie);

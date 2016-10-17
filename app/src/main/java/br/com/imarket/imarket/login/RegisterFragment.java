@@ -13,7 +13,6 @@ import br.com.imarket.imarket.DrawerInteraction;
 import br.com.imarket.imarket.HomeFragment;
 import br.com.imarket.imarket.R;
 import br.com.imarket.imarket.home.NavigationItem;
-import br.com.imarket.imarket.rest.RestGenerator;
 import br.com.imarket.imarket.view.IMarketTextView;
 import br.com.imarket.imarket.view.LoginEditText;
 import butterknife.BindView;
@@ -51,7 +50,6 @@ public class RegisterFragment extends Fragment {
     private View rootView;
 
     private final DrawerInteraction drawerInteraction;
-    private LoginClient loginClient;
     private ProgressDialog registerDialog;
     private LoginService loginService;
 
@@ -83,8 +81,6 @@ public class RegisterFragment extends Fragment {
             }
         });
 
-        loginClient = RestGenerator.createService(LoginClient.class);
-
         return rootView;
     }
 
@@ -113,7 +109,7 @@ public class RegisterFragment extends Fragment {
         }
         registerDialog = ProgressDialog.show(getContext(), "", getString(R.string.loading), true);
 
-        BuyerRegisterDTO dto = new BuyerRegisterDTO(name, email, password);
+        BuyerRegisterDTO dto = new BuyerRegisterDTO(name, email, password, LoginOrigin.IMARKET);
         loginService.register(dto, new LoginCallback() {
 
             @Override
@@ -139,4 +135,5 @@ public class RegisterFragment extends Fragment {
     private void showMessage(int messageId) {
         IMarketSnackBar.show(rootView, getString(messageId), Snackbar.LENGTH_SHORT);
     }
+
 }

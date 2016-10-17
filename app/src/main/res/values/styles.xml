@@ -23,5 +23,8 @@
         <item name="android:hint">@string/search</item>
     </style>
 
+    <style name="facebook_button" parent="ThemeOverlay.AppCompat">
+        <item name="colorAccent">@color/com_facebook_blue</item>
+    </style>
 
 </resources>

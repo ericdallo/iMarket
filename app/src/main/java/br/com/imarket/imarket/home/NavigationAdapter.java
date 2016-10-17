@@ -14,6 +14,7 @@ import br.com.imarket.imarket.R;
 import br.com.imarket.imarket.login.BuyerLogin;
 import br.com.imarket.imarket.login.LoggedBuyer;
 import br.com.imarket.imarket.login.LoginFragment;
+import br.com.imarket.imarket.profile.ProfileFragment;
 import br.com.imarket.imarket.view.IMarketTextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,6 +26,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Na
 
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
+    private static final int TYPE_FOOTER = 2;
     private static final int HEADER_POSITION = 1;
 
     private NavigationItem[] items = NavigationItem.values();
@@ -38,10 +40,12 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Na
 
     @Override
     public NavigationHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view ;
+        View view;
         if (viewType == TYPE_HEADER) {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.navigation_header, parent, false);
-        } else {
+        } else if (viewType == TYPE_FOOTER){
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.navigation_footer, parent, false);
+        }else {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.navigation_item, parent, false);
         }
         return new NavigationHolder(view, viewType);
@@ -53,15 +57,31 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Na
         View.OnClickListener selectItemListener;
 
         if (holder.type == TYPE_HEADER) {
-            if(isLogged()) {
+            if (isLogged()) {
                 BuyerLogin buyer = LoggedBuyer.getBuyer();
                 holder.tvHeaderTitle.setText(buyer.getName());
                 holder.tvHeaderDescription.setText(view.getResources().getString(R.string.my_profile));
+                selectItemListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        drawerInteraction.changeFragment(new ProfileFragment(drawerInteraction), context.getResources().getString(R.string.my_profile));
+                    }
+                };
+            } else {
+                holder.tvHeaderTitle.setText(view.getResources().getString(R.string.welcome));
+                holder.tvHeaderDescription.setText(view.getResources().getString(R.string.login));
+                selectItemListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        drawerInteraction.changeFragment(new LoginFragment(drawerInteraction), context.getResources().getString(R.string.login));
+                    }
+                };
             }
+        } else if (holder.type == TYPE_FOOTER){
             selectItemListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    drawerInteraction.changeFragment(new LoginFragment(drawerInteraction), context.getResources().getString(R.string.login));
+                    drawerInteraction.logout();
                 }
             };
         } else {
@@ -87,13 +107,18 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Na
 
     @Override
     public int getItemCount() {
-        return items.length + HEADER_POSITION;
+        if (isLogged()) {
+            return items.length + HEADER_POSITION;
+        }
+        return items.length;
     }
 
     @Override
     public int getItemViewType(int position) {
         if (position == 0) {
             return TYPE_HEADER;
+        } else if (position == items.length) {
+            return TYPE_FOOTER;
         }
         return TYPE_ITEM;
     }
@@ -102,14 +127,26 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Na
 
         private int type;
 
-        @Nullable @BindView(R.id.lt_item) View viewItem;
-        @Nullable @BindView(R.id.tv_title_navigation_item) TextView tvTitleNavigationItem;
-        @Nullable @BindView(R.id.tv_description_navigation_item) TextView tvDescriptionNavigationItem;
-        @Nullable @BindView(R.id.cv_navigation_item) CircleImageView cvNavigationItem;
-        @Nullable @BindView(R.id.tv_header_title) IMarketTextView tvHeaderTitle;
-        @Nullable @BindView(R.id.tv_header_description) IMarketTextView tvHeaderDescription;
+        @Nullable
+        @BindView(R.id.lt_item)
+        View viewItem;
+        @Nullable
+        @BindView(R.id.tv_title_navigation_item)
+        TextView tvTitleNavigationItem;
+        @Nullable
+        @BindView(R.id.tv_description_navigation_item)
+        TextView tvDescriptionNavigationItem;
+        @Nullable
+        @BindView(R.id.cv_navigation_item)
+        CircleImageView cvNavigationItem;
+        @Nullable
+        @BindView(R.id.tv_header_title)
+        IMarketTextView tvHeaderTitle;
+        @Nullable
+        @BindView(R.id.tv_header_description)
+        IMarketTextView tvHeaderDescription;
 
-        NavigationHolder (View view, int viewType) {
+        NavigationHolder(View view, int viewType) {
             super(view);
             ButterKnife.bind(this, view);
 

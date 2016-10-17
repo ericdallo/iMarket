@@ -19,4 +19,8 @@ public class LoggedBuyer {
         return buyer;
     }
 
+    public static void logout() {
+        buyer = null;
+        logged = false;
+    }
 }

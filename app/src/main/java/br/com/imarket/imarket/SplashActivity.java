@@ -3,6 +3,8 @@ package br.com.imarket.imarket;
 import android.content.Intent;
 
 import com.daimajia.androidanimations.library.Techniques;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 import com.viksaa.sssplash.lib.activity.AwesomeSplash;
 import com.viksaa.sssplash.lib.cnst.Flags;
 import com.viksaa.sssplash.lib.model.ConfigSplash;
@@ -24,6 +26,8 @@ public class SplashActivity extends AwesomeSplash {
         } else {
             nextActivity = new Intent(this, LocationActivity.class);
         }
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(getApplicationContext());
     }
 
     @Override

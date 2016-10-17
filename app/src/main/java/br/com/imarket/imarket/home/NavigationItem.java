@@ -7,7 +7,7 @@ import br.com.imarket.imarket.R;
 
 public enum NavigationItem {
 
-    HOME(R.drawable.navigation_login_item, "Home", "Início") {
+    HOME(R.drawable.navigation_login_item, "iMarket", "Início") {
         @Override
         public Fragment getFragment() {
             return new HomeFragment();
@@ -32,6 +32,12 @@ public enum NavigationItem {
         }
     },
     OFFERS(R.drawable.navigation_login_item, "Ofertas", "Os melhores preços") {
+        @Override
+        public Fragment getFragment() {
+            return new HomeFragment();
+        }
+    },
+    LOGOUT(R.drawable.navigation_login_item, "Sair", "") {
         @Override
         public Fragment getFragment() {
             return new HomeFragment();

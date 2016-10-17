@@ -10,10 +10,12 @@ import android.view.View;
 import com.stephentuso.welcome.WelcomeScreenHelper;
 
 import br.com.imarket.imarket.util.IMarketUtils;
+import br.com.imarket.imarket.util.Preferences;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static br.com.imarket.imarket.util.LocationUtil.isGPSEnabled;
+import static br.com.imarket.imarket.util.Preferences.HIDE_WELCOME;
 
 public class LocationActivity extends AppCompatActivity {
 
@@ -24,9 +26,15 @@ public class LocationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.location);
 
-        welcomeScreen = new WelcomeScreenHelper(this, WelcomeScreenActivity.class);
-        welcomeScreen.show(savedInstanceState);
-        welcomeScreen.forceShow();
+        Preferences.setActivity(this);
+
+        if (!Preferences.getBoolean(HIDE_WELCOME)) {
+            welcomeScreen = new WelcomeScreenHelper(this, WelcomeScreenActivity.class);
+            welcomeScreen.show(savedInstanceState);
+            welcomeScreen.forceShow();
+
+            Preferences.putBoolean(HIDE_WELCOME, true);
+        }
 
         ButterKnife.bind(this);
         IMarketUtils.animateHeader(this);

@@ -7,7 +7,7 @@ import br.com.imarket.imarket.util.Preferences;
 import okhttp3.Interceptor;
 import okhttp3.Response;
 
-import static br.com.imarket.imarket.util.Preferences.PREF_COOKIES;
+import static br.com.imarket.imarket.util.Preferences.COOKIES;
 
 class ReceivedCookiesInterceptor implements Interceptor {
     @Override
@@ -21,7 +21,7 @@ class ReceivedCookiesInterceptor implements Interceptor {
                 cookies.add(header);
             }
 
-            Preferences.putStringSet(PREF_COOKIES, cookies);
+            Preferences.putStringSet(COOKIES, cookies);
         }
 
         return originalResponse;

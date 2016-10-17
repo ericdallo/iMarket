@@ -3,6 +3,7 @@ package br.com.imarket.imarket.util;
 import android.text.TextUtils;
 
 public class TextValidation {
+
     public static boolean isBlank(String...texts) {
         return isTextsBlank(texts);
     }
