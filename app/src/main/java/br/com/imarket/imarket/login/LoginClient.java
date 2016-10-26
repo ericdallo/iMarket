@@ -1,7 +1,6 @@
 package br.com.imarket.imarket.login;
 
 
-import br.com.imarket.imarket.util.IMarketConstants;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -18,16 +17,13 @@ public interface LoginClient {
 
     @FormUrlEncoded
     @POST(LOGIN_RESOURCE_URL)
-    Call<Void> login(
+    Call<BuyerLogin> login(
             @Field("username") String email,
             @Field("password") String password
     );
 
     @DELETE(LOGIN_RESOURCE_URL)
     Call<Void> logout();
-
-    @GET(LOGIN_INFO_URL)
-    Call<BuyerLogin> logged();
 
     @POST(REGISTER_URL)
     Call<Void> register(@Body BuyerRegisterDTO buyerRegisterDTO);

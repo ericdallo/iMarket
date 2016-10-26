@@ -41,26 +41,7 @@ public class LoginService {
     }
 
     private void realizeLogin(final String email, final String password, final LoginCallback callback) {
-        loginClient.login(email, password).enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccessful()) {
-                    requestBuyerInfo(callback);
-                } else {
-                    callback.invalidInfo();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Log.d(TAG, "Error on processing login", t);
-                callback.error();
-            }
-        });
-    }
-
-    private void requestBuyerInfo(final LoginCallback callback) {
-        loginClient.logged().enqueue(new Callback<BuyerLogin>() {
+        loginClient.login(email, password).enqueue(new Callback<BuyerLogin>() {
             @Override
             public void onResponse(Call<BuyerLogin> call, Response<BuyerLogin> response) {
                 if (response.isSuccessful()) {
@@ -78,7 +59,6 @@ public class LoginService {
             }
         });
     }
-
 
     public void logout(final LogoutCallback callback) {
         if (LoggedBuyer.isLogged()) {

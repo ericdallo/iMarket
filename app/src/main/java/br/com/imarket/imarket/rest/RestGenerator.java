@@ -1,7 +1,6 @@
 package br.com.imarket.imarket.rest;
 
 
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -27,6 +26,7 @@ public class RestGenerator {
         httpClient.addInterceptor(logging);
         httpClient.addInterceptor(addCookies);
         httpClient.addInterceptor(receivedCookies);
+        httpClient.followRedirects(true);
         Retrofit retrofit = builder.client(httpClient.build()).build();
         return retrofit.create(serviceClass);
     }

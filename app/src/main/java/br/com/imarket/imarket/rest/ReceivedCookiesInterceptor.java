@@ -10,6 +10,7 @@ import okhttp3.Response;
 import static br.com.imarket.imarket.util.Preferences.COOKIES;
 
 class ReceivedCookiesInterceptor implements Interceptor {
+
     @Override
     public Response intercept(Chain chain) throws IOException {
         Response originalResponse = chain.proceed(chain.request());

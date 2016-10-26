@@ -19,11 +19,18 @@ class AddCookiesInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request.Builder builder = chain.request().newBuilder();
         Set<String> preferences = Preferences.getStringSet(COOKIES, new HashSet<String>());
-            for (String cookie : preferences) {
-            builder.addHeader("Cookie", cookie);
-            Log.v("OkHttp", "Adding Header: " + cookie);
+
+        String finalCookie = "";
+
+        for (String cookie : preferences) {
+            if (cookie.contains("authorization_cookie")) {
+                finalCookie += cookie + "; ";
+            }
         }
 
+        builder.addHeader("Cookie", finalCookie);
+
+        Log.v("OkHttp", "Adding Header: " + finalCookie);
         return chain.proceed(builder.build());
     }
 }
