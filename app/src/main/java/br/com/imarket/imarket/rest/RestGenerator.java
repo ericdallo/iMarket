@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RestGenerator {
 
-    private static final String API_BASE_URL = "http://192.168.0.20:8080";
+    private static final String API_BASE_URL = "http://192.168.0.20:9090";
 
     private static final HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
     private static ReceivedCookiesInterceptor receivedCookies = new ReceivedCookiesInterceptor();

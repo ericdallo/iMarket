@@ -18,4 +18,5 @@
     <color name="login_background">#EDEDED</color>
     <color name="facebook">#3B5998</color>
     <color name="corner_gray">#E1E1E1</color>
+    <color name="colorPrimaryLight">#E7CCD1</color>
 </resources>

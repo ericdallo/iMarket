@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import br.com.imarket.imarket.BackAction;
 import br.com.imarket.imarket.DrawerInteraction;
 import br.com.imarket.imarket.HomeFragment;
 import br.com.imarket.imarket.R;
@@ -24,7 +26,7 @@ import static android.util.Patterns.EMAIL_ADDRESS;
 import static br.com.imarket.imarket.util.TextValidation.isBlank;
 import static br.com.imarket.imarket.util.TextValidation.isNotEquals;
 
-public class RegisterFragment extends Fragment {
+public class RegisterFragment extends Fragment implements BackAction {
 
     private static final String TAG = "RegisterTag";
 
@@ -60,6 +62,7 @@ public class RegisterFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        drawerInteraction.setBackable(this);
         rootView = inflater.inflate(R.layout.register_fragment, container, false);
         loginService = new LoginService();
         ButterKnife.bind(this, rootView);
@@ -136,4 +139,8 @@ public class RegisterFragment extends Fragment {
         IMarketSnackBar.show(rootView, getString(messageId), Snackbar.LENGTH_SHORT);
     }
 
+    @Override
+    public void execute() {
+        drawerInteraction.changeFragment(new LoginFragment(drawerInteraction), getString(R.string.login));
+    }
 }

@@ -3,6 +3,7 @@ package br.com.imarket.imarket;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
@@ -11,36 +12,56 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.facebook.login.LoginManager;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import br.com.imarket.imarket.home.NavigationAdapter;
+import br.com.imarket.imarket.login.BuyerLogin;
+import br.com.imarket.imarket.login.LoggedBuyer;
+import br.com.imarket.imarket.login.LoginFragment;
 import br.com.imarket.imarket.login.LoginService;
 import br.com.imarket.imarket.login.LogoutCallback;
+import br.com.imarket.imarket.profile.ProfileFragment;
 import br.com.imarket.imarket.util.IMarketUtils;
 import br.com.imarket.imarket.util.Preferences;
 import br.com.imarket.imarket.view.AmaticTextView;
+import br.com.imarket.imarket.view.IMarketTextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+import static br.com.imarket.imarket.login.LoggedBuyer.isLogged;
 
 public class MainActivity extends AppCompatActivity implements DrawerInteraction {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.dt_drawer)
-    DrawerLayout dtDrawer;
+    @BindView(R.id.dl_drawer)
+    DrawerLayout dlDrawer;
+    @BindView(R.id.lt_navigation)
+    LinearLayout ltNavigation;
     @BindView(R.id.rv_left_drawer)
     RecyclerView rvLeftDrawer;
     @BindView(R.id.search_view)
     MaterialSearchView searchView;
     @BindView(R.id.toolbar_title)
     AmaticTextView toolbarTitle;
+    @BindView(R.id.navigation_header_container)
+    NavigationView navigationHeaderView;
 
-    private NavigationAdapter navigationAdapter;
+    private IMarketTextView headerTitle;
+    private IMarketTextView headerDescription;
+
     private LoginService loginService;
+
+    private BackAction backAction;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,15 +74,18 @@ public class MainActivity extends AppCompatActivity implements DrawerInteraction
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
-        ActionBarDrawerToggle actionBarToggle = new ActionBarDrawerToggle(this, dtDrawer, toolbar, R.string.open, R.string.close);
-        dtDrawer.addDrawerListener(actionBarToggle);
+        ActionBarDrawerToggle actionBarToggle = new ActionBarDrawerToggle(this, dlDrawer, toolbar, R.string.open, R.string.close);
+        dlDrawer.addDrawerListener(actionBarToggle);
         actionBarToggle.syncState();
 
-        navigationAdapter = new NavigationAdapter(this, this);
+        NavigationAdapter navigationAdapter = new NavigationAdapter(this);
         rvLeftDrawer.setHasFixedSize(true);
         rvLeftDrawer.setLayoutManager(new LinearLayoutManager(this));
         rvLeftDrawer.setAdapter(navigationAdapter);
-        rvLeftDrawer.setBackgroundColor(getResources().getColor(R.color.shelf_background));
+
+        headerTitle = (IMarketTextView) navigationHeaderView.getHeaderView(0).findViewById(R.id.tv_header_title);
+        headerDescription = (IMarketTextView) navigationHeaderView.getHeaderView(0).findViewById(R.id.tv_header_description);
+        checkLogin();
 
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
@@ -77,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements DrawerInteraction
             }
         });
 
-        changeFragment(new HomeFragment(), getResources().getString(R.string.imarket));
+        changeMainFragment(new HomeFragment(), getResources().getString(R.string.imarket));
     }
 
     @Override
@@ -94,9 +118,17 @@ public class MainActivity extends AppCompatActivity implements DrawerInteraction
     public void onBackPressed() {
         if (searchView.isSearchOpen()) {
             searchView.closeSearch();
+        } else if (backAction != null) {
+            backAction.execute();
+            backAction = null;
         } else {
             moveTaskToBack(true);
         }
+    }
+
+    @Override
+    public void setBackable(BackAction backAction) {
+        this.backAction = backAction;
     }
 
     @Override
@@ -114,9 +146,9 @@ public class MainActivity extends AppCompatActivity implements DrawerInteraction
         loginService.logout(new LogoutCallback() {
             @Override
             public void success() {
+                LoginManager.getInstance().logOut();
                 logoutDialog.dismiss();
                 changeMainFragment(new HomeFragment(), getString(R.string.imarket));
-                LoginManager.getInstance().logOut();
             }
 
             @Override
@@ -127,13 +159,37 @@ public class MainActivity extends AppCompatActivity implements DrawerInteraction
     }
 
     private void changeMainFragment(Fragment fragment, String title) {
-        navigationAdapter.notifyDataSetChanged(); // TODO nao chamar sempre
+        checkLogin();
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.lt_main_content, fragment);
         transaction.commit();
         toolbarTitle.setText(title);
-        dtDrawer.closeDrawer(rvLeftDrawer);
+        dlDrawer.closeDrawer(ltNavigation);
     }
 
+    private void checkLogin() {
+        if (isLogged()) {
+            BuyerLogin buyer = LoggedBuyer.getBuyer();
+            headerTitle.setText(buyer.getName());
+            headerDescription.setText(getString(R.string.my_profile));
+            final ProfileFragment profileFragment = new ProfileFragment(this);
+            navigationHeaderView.getHeaderView(0).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    changeMainFragment(profileFragment , getString(R.string.my_profile));
+                }
+            });
+        } else {
+            headerTitle.setText(getString(R.string.welcome));
+            headerDescription.setText(getString(R.string.login));
+            final LoginFragment loginFragment = new LoginFragment(this);
+            navigationHeaderView.getHeaderView(0).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    changeMainFragment(loginFragment, getString(R.string.login));
+                }
+            });
+        }
+    }
 }

@@ -10,13 +10,18 @@ import br.com.imarket.imarket.R;
 
 public class IMarketUtils {
 
-    public static void animateHeader(Activity activity) {
-        View view = activity.findViewById(R.id.lt_banner);
-        Animation animation = new TranslateAnimation(TranslateAnimation.ABSOLUTE, 0f, TranslateAnimation.ABSOLUTE, 100f, TranslateAnimation.ABSOLUTE, 0f, TranslateAnimation.ABSOLUTE, 0f);
+    private final static Animation animation;
+
+    static {
+        animation = new TranslateAnimation(TranslateAnimation.ABSOLUTE, 0f, TranslateAnimation.ABSOLUTE, 100f, TranslateAnimation.ABSOLUTE, 0f, TranslateAnimation.ABSOLUTE, 0f);
         animation.setDuration(10000);
         animation.setRepeatCount(-1);
         animation.setRepeatMode(Animation.REVERSE);
         animation.setInterpolator(new LinearInterpolator());
-        view.setAnimation(animation);
+    }
+
+    public static void animateHeader(Activity activity) {
+        View headerView = activity.findViewById(R.id.lt_banner);
+        headerView.setAnimation(animation);
     }
 }

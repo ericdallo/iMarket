@@ -3,6 +3,7 @@ package br.com.imarket.imarket.login;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -18,6 +19,7 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 
 import org.json.JSONException;
@@ -27,6 +29,7 @@ import br.com.imarket.imarket.DrawerInteraction;
 import br.com.imarket.imarket.HomeFragment;
 import br.com.imarket.imarket.R;
 import br.com.imarket.imarket.home.NavigationItem;
+import br.com.imarket.imarket.util.IMarketConstants;
 import br.com.imarket.imarket.view.FacebookButton;
 import br.com.imarket.imarket.view.LoginEditText;
 import butterknife.BindView;
@@ -94,8 +97,10 @@ public class LoginFragment extends Fragment  {
 
                                 @Override
                                 public void error() {
+                                    LoginManager.getInstance().logOut();
                                     loginDialog.cancel();
                                     IMarketSnackBar.show(rootView, getString(R.string.login_error), Snackbar.LENGTH_SHORT);
+
                                 }
                             });
 
@@ -169,8 +174,15 @@ public class LoginFragment extends Fragment  {
         });
     }
 
+    @OnClick(R.id.lt_market_login)
+    public void marketLogin() {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(IMarketConstants.EXTERNAL_LOGIN_MARKET));
+        startActivity(browserIntent);
+    }
+
     @OnClick(R.id.bt_register)
     public void register() {
         drawerInteraction.changeFragment(new RegisterFragment(drawerInteraction), getResources().getString(R.string.register_title));
     }
+
 }

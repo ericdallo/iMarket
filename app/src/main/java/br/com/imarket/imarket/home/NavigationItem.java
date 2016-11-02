@@ -37,12 +37,7 @@ public enum NavigationItem {
             return new HomeFragment();
         }
     },
-    LOGOUT(R.drawable.navigation_login_item, "Sair", "") {
-        @Override
-        public Fragment getFragment() {
-            return new HomeFragment();
-        }
-    };
+    ;
 
     private final int imagePath;
     private final String name;

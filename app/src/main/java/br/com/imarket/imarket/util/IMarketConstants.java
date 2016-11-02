@@ -5,4 +5,5 @@ public class IMarketConstants {
     public static final String LOGIN_RESOURCE_URL = "login";
     public static final String LOGIN_INFO_URL = "logged";
     public static final String REGISTER_URL = "register";
+    public static final String EXTERNAL_LOGIN_MARKET = "http://imarketbr.com/";
 }

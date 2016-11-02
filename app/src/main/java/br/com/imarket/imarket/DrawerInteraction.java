@@ -7,4 +7,6 @@ public interface DrawerInteraction {
     void changeFragment(Fragment fragment, String title);
 
     void logout();
+
+    void setBackable(BackAction backAction);
 }
