@@ -128,9 +128,15 @@ public class RegisterFragment extends Fragment implements BackAction {
             }
 
             @Override
+            public void invalidType() {
+                registerDialog.cancel();
+                IMarketSnackBar.show(rootView, getString(R.string.login_invalid_type), Snackbar.LENGTH_SHORT);
+            }
+
+            @Override
             public void error() {
                 registerDialog.cancel();
-                IMarketSnackBar.show(rootView, getString(R.string.register_error), Snackbar.LENGTH_SHORT);
+                IMarketSnackBar.show(rootView, getString(R.string.register_error), Snackbar.LENGTH_LONG);
             }
         });
     }

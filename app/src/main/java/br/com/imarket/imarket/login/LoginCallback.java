@@ -6,5 +6,7 @@ public interface LoginCallback {
 
     void invalidInfo();
 
+    void invalidType();
+
     void error();
 }

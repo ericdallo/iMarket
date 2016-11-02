@@ -96,6 +96,12 @@ public class LoginFragment extends Fragment  {
                                 }
 
                                 @Override
+                                public void invalidType() {
+                                    loginDialog.cancel();
+                                    IMarketSnackBar.show(rootView, getString(R.string.login_invalid_type), Snackbar.LENGTH_LONG);
+                                }
+
+                                @Override
                                 public void error() {
                                     LoginManager.getInstance().logOut();
                                     loginDialog.cancel();
@@ -164,6 +170,12 @@ public class LoginFragment extends Fragment  {
             public void invalidInfo() {
                 loginDialog.cancel();
                 IMarketSnackBar.show(rootView, getString(R.string.login_invalid_credentials), Snackbar.LENGTH_SHORT);
+            }
+
+            @Override
+            public void invalidType() {
+                loginDialog.cancel();
+                IMarketSnackBar.show(rootView, getString(R.string.login_invalid_type), Snackbar.LENGTH_LONG);
             }
 
             @Override

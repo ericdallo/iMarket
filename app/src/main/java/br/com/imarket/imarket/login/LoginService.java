@@ -47,6 +47,8 @@ public class LoginService {
                 if (response.isSuccessful()) {
                     LoggedBuyer.setBuyer(response.body());
                     callback.success(response.body());
+                } else if (response.code() == 406){
+                    callback.invalidType();
                 } else {
                     callback.invalidInfo();
                 }

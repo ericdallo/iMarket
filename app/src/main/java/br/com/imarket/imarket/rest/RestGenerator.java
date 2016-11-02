@@ -13,6 +13,7 @@ public class RestGenerator {
     private static final HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
     private static ReceivedCookiesInterceptor receivedCookies = new ReceivedCookiesInterceptor();
     private static AddCookiesInterceptor addCookies = new AddCookiesInterceptor();
+    private static MobileHeaderInterceptor mobileHeader = new MobileHeaderInterceptor();
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
@@ -26,6 +27,7 @@ public class RestGenerator {
         httpClient.addInterceptor(logging);
         httpClient.addInterceptor(addCookies);
         httpClient.addInterceptor(receivedCookies);
+        httpClient.addInterceptor(mobileHeader);
         httpClient.followRedirects(true);
         Retrofit retrofit = builder.client(httpClient.build()).build();
         return retrofit.create(serviceClass);

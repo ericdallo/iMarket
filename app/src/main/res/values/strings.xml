@@ -56,4 +56,5 @@
     <string name="is_shop">É um mercado?</string>
     <string name="contact_us">Fale conosco!</string>
     <string name="market_login">Login do mercado</string>
+    <string name="login_invalid_type">Login permitido somente para compradores</string>
 </resources>
